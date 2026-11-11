@@ -5,9 +5,11 @@ data repository: the catalog and schema are served from `main`, and package
 bytes are attached to GitHub Releases. Plugin source repositories may stay
 private.
 
-> **Current state:** the catalog is intentionally empty. No plugin packages are
-> listed yet. An empty `plugins` array is a valid
-> catalog meaning "no official packages", not an error.
+> **Current release:** [v0.1.0](https://github.com/Little-Princess-Studio/medot-official-plugin-registry/releases/tag/v0.1.0)
+> contains seven official plugins. RPG, GAL, FLUX, Qwen and H3 frontends use `any`;
+> Generation Backend and RMVA currently provide Windows x86_64 binaries.
+> Install Generation Backend before the model plugins. Model weights and RPG Maker
+> runtime assets are not included.
 
 ## Files
 

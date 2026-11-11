@@ -1,4 +1,123 @@
 {
   "schemaVersion": 1,
-  "plugins": []
+  "plugins": [
+    {
+      "pluginId": "generation-backend",
+      "name": "Generation Backend",
+      "description": "Shared execution backend for official image and walking video model plugins.",
+      "version": "0.1.0",
+      "sdkVersion": 1,
+      "dependencies": [],
+      "artifacts": [
+        {
+          "target": "windows-x86_64",
+          "url": "https://github.com/Little-Princess-Studio/medot-official-plugin-registry/releases/download/v0.1.0/generation-backend-0.1.0-windows-x86_64.medot-template",
+          "size": 9846107,
+          "sha256": "f49c04d631aa62f21662b7da58a4fe8e0aabc1f24fba42cfa82ce5f87aefbad9"
+        }
+      ]
+    },
+    {
+      "pluginId": "generation-flux",
+      "name": "FLUX",
+      "description": "FLUX image generation models and reference image capabilities.",
+      "version": "0.1.0",
+      "sdkVersion": 1,
+      "dependencies": [
+        "generation-backend"
+      ],
+      "artifacts": [
+        {
+          "target": "any",
+          "url": "https://github.com/Little-Princess-Studio/medot-official-plugin-registry/releases/download/v0.1.0/generation-flux-0.1.0-any.medot-template",
+          "size": 3097,
+          "sha256": "5fc95e17cbf95746a368b68a38f911556947d50a342dbafce1eaf8ac16ebac33"
+        }
+      ]
+    },
+    {
+      "pluginId": "generation-h3",
+      "name": "H3 Walking Video",
+      "description": "Local H3 walking video models and precision controls. Official cloud API is not integrated.",
+      "version": "0.1.0",
+      "sdkVersion": 1,
+      "dependencies": [
+        "generation-backend"
+      ],
+      "artifacts": [
+        {
+          "target": "any",
+          "url": "https://github.com/Little-Princess-Studio/medot-official-plugin-registry/releases/download/v0.1.0/generation-h3-0.1.0-any.medot-template",
+          "size": 10894,
+          "sha256": "89641c3fff40ca8728c75fba354a186725d963b7bebb46eb078c083646e32436"
+        }
+      ]
+    },
+    {
+      "pluginId": "generation-qwen",
+      "name": "Qwen Image",
+      "description": "Qwen image generation models and paired reference capabilities.",
+      "version": "0.1.0",
+      "sdkVersion": 1,
+      "dependencies": [
+        "generation-backend"
+      ],
+      "artifacts": [
+        {
+          "target": "any",
+          "url": "https://github.com/Little-Princess-Studio/medot-official-plugin-registry/releases/download/v0.1.0/generation-qwen-0.1.0-any.medot-template",
+          "size": 4505,
+          "sha256": "6717a2c5f0e060a89fc30449b180f4dda044a7d7db1102f87abbb94da2e30b66"
+        }
+      ]
+    },
+    {
+      "pluginId": "official-gal",
+      "name": "GAL Project",
+      "description": "Visual novel authoring template with character, scene and dialogue databases.",
+      "version": "0.1.0",
+      "sdkVersion": 1,
+      "dependencies": [],
+      "artifacts": [
+        {
+          "target": "any",
+          "url": "https://github.com/Little-Princess-Studio/medot-official-plugin-registry/releases/download/v0.1.0/official-gal-0.1.0-any.medot-template",
+          "size": 6601,
+          "sha256": "cc267303d50e5ac99f7ec7805f07a6dbfbdf5ac91ee96df602ff732f976d405f"
+        }
+      ]
+    },
+    {
+      "pluginId": "official-rpg",
+      "name": "RPG Project",
+      "description": "RPG project template, event actions and runtime serialization.",
+      "version": "0.1.0",
+      "sdkVersion": 1,
+      "dependencies": [],
+      "artifacts": [
+        {
+          "target": "any",
+          "url": "https://github.com/Little-Princess-Studio/medot-official-plugin-registry/releases/download/v0.1.0/official-rpg-0.1.0-any.medot-template",
+          "size": 66090,
+          "sha256": "d42c7cf5ff7bfa220208a909e0ed8bd397c009de3ed1cd69a820a75f5d693b39"
+        }
+      ]
+    },
+    {
+      "pluginId": "rmva-support",
+      "name": "RPG Maker VX Ace Support",
+      "description": "RMVA project editing and reversible rvdata2 import and export.",
+      "version": "0.1.0",
+      "sdkVersion": 1,
+      "dependencies": [],
+      "artifacts": [
+        {
+          "target": "windows-x86_64",
+          "url": "https://github.com/Little-Princess-Studio/medot-official-plugin-registry/releases/download/v0.1.0/rmva-support-0.1.0-windows-x86_64.medot-template",
+          "size": 4365568,
+          "sha256": "b7f7578ea9e693f6012fd9d1cd32c4623d46ae131a2653fbf16f9351eb769390"
+        }
+      ]
+    }
+  ]
 }
