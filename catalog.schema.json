@@ -1,0 +1,125 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/Little-Princess-Studio/medot-official-plugin-registry/main/catalog.schema.json",
+  "title": "Medot official plugin registry catalog",
+  "description": "Version 1 catalog for the public Medot plugin registry. The catalog lists package metadata and release-asset URLs; it does not contain package bytes. Uniqueness of pluginId and artifact target, dependency existence, and dependency acyclicity are cross-field rules enforced by scripts/plugins/catalog.mjs.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "plugins"],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "plugins": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/plugin"
+      }
+    }
+  },
+  "$defs": {
+    "pluginId": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^[A-Za-z0-9_.-]+$",
+      "not": {
+        "enum": [".", ".."]
+      }
+    },
+    "version": {
+      "type": "string",
+      "maxLength": 62,
+      "description": "Strict numeric x.y.z. Pre-release and build suffixes are not part of catalog schema 1. Each numeric component must fit an unsigned 64-bit integer; the generator enforces this backend limit.",
+      "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$"
+    },
+    "plugin": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "pluginId",
+        "name",
+        "description",
+        "version",
+        "sdkVersion",
+        "dependencies",
+        "artifacts"
+      ],
+      "properties": {
+        "pluginId": {
+          "$ref": "#/$defs/pluginId"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 4000
+        },
+        "version": {
+          "$ref": "#/$defs/version"
+        },
+        "sdkVersion": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Template SDK number. The current editor accepts SDK 1 only."
+        },
+        "dependencies": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/pluginId"
+          },
+          "uniqueItems": true,
+          "description": "Mandatory plugin IDs. Every dependency must exist in the catalog, and the dependency graph must be acyclic."
+        },
+        "artifacts": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/artifact"
+          },
+          "description": "One artifact per target. Targets must be unique within a plugin."
+        }
+      }
+    },
+    "artifact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["target", "url", "size", "sha256"],
+      "properties": {
+        "target": {
+          "type": "string",
+          "enum": [
+            "any",
+            "windows-x86_64",
+            "windows-aarch64",
+            "macos-x86_64",
+            "macos-aarch64",
+            "linux-x86_64",
+            "linux-aarch64"
+          ]
+        },
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "maxLength": 2048,
+          "pattern": "^https://github\\.com/Little-Princess-Studio/medot-official-plugin-registry/releases/download/[A-Za-z0-9][A-Za-z0-9._-]{0,127}/[^/?#\\s]+$",
+          "description": "Public GitHub release asset URL in the official registry repository."
+        },
+        "size": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Actual byte size of the .medot-template artifact file."
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$",
+          "description": "Lowercase SHA-256 of the artifact file bytes, not of its JSON contents."
+        }
+      }
+    }
+  }
+}
